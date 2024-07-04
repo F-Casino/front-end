@@ -1,0 +1,16 @@
+[package]
+name = "game-frontend"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+console_error_panic_hook = "0.1.7"
+js-sys = "0.3.69"
+leptos = { version = "0.6.12", features = ["csr", "nightly", "tracing", "trace-component-props"] }
+leptos_meta = { version = "0.6.12", features = ["csr", "nightly"] }
+serde = { version = "1.0.203", features = ["derive"] }
+solana-client-wasm = { version = "=1.17.4" }
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+wasm-bindgen = "0.2.92"
+wasm-bindgen-futures = "0.4.42"

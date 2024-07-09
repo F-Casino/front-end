@@ -1,5 +1,7 @@
 pub mod app;
 pub mod phantom;
+pub mod component;
+pub mod config;
 
 use leptos::*;
 use tracing_subscriber::prelude::*;

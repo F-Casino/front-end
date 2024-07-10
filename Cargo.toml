@@ -8,10 +8,10 @@ console_error_panic_hook = "0.1.7"
 js-sys = "0.3.69"
 leptos = { version = "0.6.12", features = ["csr", "nightly", "tracing", "trace-component-props"] }
 leptos_meta = { version = "0.6.12", features = ["csr", "nightly"] }
-reqwest = { version = "0.12.1", features = ["json"] }
+reqwest = { version = "0.12.1", features = ["blocking", "json"] }
 serde = { version = "1.0.203", features = ["derive"] }
+serde-wasm-bindgen = "0.6.5"
 solana-client-wasm = { version = "=1.17.4" }
-tokio = { version = "1.38.0", features = ["full"] }
 tracing = "0.1.40"
 tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
 wasm-bindgen = "0.2.92"

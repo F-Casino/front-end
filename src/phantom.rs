@@ -203,7 +203,7 @@ impl PhantomWallet {
                 };
             }
         } else {
-                return Err(ServerFnError::ServerError("wallet not found".to_string()));
+            return Err(ServerFnError::ServerError("wallet not found".to_string()));
         }
 
         Ok(PhantomWallet {
@@ -212,39 +212,79 @@ impl PhantomWallet {
         })
     }
     //
-    // pub fn sign_transaction_method() -> Result<(), Error> {
-    //     let window = web_sys::window().unwrap();
-    //     if let Some(solana) = window.get("solana") {
-    //         let this = JsValue::null();
-    //         let sign_trans_str = wasm_bindgen::JsValue::from_str("signTransaction");
-    //         let sign_trans_method: js_sys::Function =
-    //             js_sys::Reflect::get(&*solana, &sign_trans_str)
-    //                 .unwrap()
-    //                 .into();
-    //         // let resp = sign_trans.call0(&this).unwrap();
-    //         log::debug!("sign_trans_method{:?}", sign_trans_method.to_string());
-    //         log::debug!(
-    //             "sign_transaction: {:?}",
-    //             js_sys::Object::get_own_property_names(&solana)
-    //         );
-    //         Ok(())
-    //     } else {
-    //         Err(Error::PhantomWalletNotFound)
-    //     }
-    // }
-    // pub fn sign_transaction(ctx: ScopeRef<'_>, transaction: Transaction) -> Result<(), Error> {
-    //     let wallet_signal = ctx.use_context::<Signal<PhantomWallet>>();
-    //     let wallet = wallet_signal.get();
-    //     if wallet.status == PhantomStatus::Disconnected {
-    //         let params = PhantomRequest::SignTransaction {
-    //             params: PhantomMethodParams {
-    //                 message: "dingus".to_string(),
-    //             },
-    //         };
-    //     } else {
-    //     }
-    //     Ok(())
-    // }
+    pub fn sign_transaction_method() -> Result<(), ServerFnError> {
+        let window = web_sys::window().unwrap();
+        if let Some(solana) = window.get("solana") {
+            let this = JsValue::null();
+            let sign_trans_str = wasm_bindgen::JsValue::from_str("signTransaction");
+            let sign_trans_method: js_sys::Function =
+                js_sys::Reflect::get(&*solana, &sign_trans_str)
+                    .unwrap()
+                    .into();
+            // let resp = sign_trans.call0(&this).unwrap();
+            tracing::debug!("sign_trans_method{:?}", sign_trans_method.to_string());
+            tracing::debug!(
+                "sign_transaction: {:?}",
+                js_sys::Object::get_own_property_names(&solana)
+            );
+            Ok(())
+        } else {
+            return Err(ServerFnError::ServerError("wallet not found".to_string()));
+        }
+    }
+
+    pub fn sign_and_send_transaction_method() -> Result<(), ServerFnError> {
+        let window = web_sys::window().unwrap();
+        if let Some(solana) = window.get("solana") {
+            let this = JsValue::null();
+            let sign_trans_str = wasm_bindgen::JsValue::from_str("signAndSendTransaction");
+            let sign_trans_method: js_sys::Function =
+                js_sys::Reflect::get(&*solana, &sign_trans_str)
+                    .unwrap()
+                    .into();
+            // let resp = sign_trans.call0(&this).unwrap();
+            tracing::debug!("sign_trans_method{:?}", sign_trans_method.to_string());
+            tracing::debug!(
+                "sign_transaction: {:?}",
+                js_sys::Object::get_own_property_names(&solana)
+            );
+            Ok(())
+        } else {
+            return Err(ServerFnError::ServerError("wallet not found".to_string()));
+        }
+    }
+
+    pub fn sign_and_send_transaction() -> Result<(), ServerFnError> {
+        let window = web_sys::window().unwrap();
+        if let Some(solana) = window.get("solana") {
+            let this = JsValue::null();
+            let sign_trans_str = wasm_bindgen::JsValue::from_str("signAndSendTransaction");
+            let sign_trans_method: js_sys::Function =
+                js_sys::Reflect::get(&*solana, &sign_trans_str)
+                    .unwrap()
+                    .into();
+            // let resp = sign_trans.call0(&this).unwrap();
+            tracing::debug!("sign_trans_method{:?}", sign_trans_method.to_string());
+            tracing::debug!(
+                "sign_transaction: {:?}",
+                js_sys::Object::get_own_property_names(&solana)
+            );
+            Ok(())
+        } else {
+            return Err(ServerFnError::ServerError("wallet not found".to_string()));
+        }
+    }
+    pub fn sign_transaction(&self, transaction: Transaction) -> Result<(), ServerFnError> {
+        if self.status == PhantomStatus::Disconnected {
+            let params = PhantomRequest::SignTransaction {
+                params: PhantomMethodParams {
+                    message: "dingus".to_string(),
+                },
+            };
+        } else {
+        }
+        Ok(())
+    }
     //
     // pub fn create_transfer_transaction(
     //     ctx: ScopeRef<'_>,

@@ -1,4 +1,10 @@
-use leptos::*;
+use std::str::FromStr;
+
+use leptos::{leptos_dom::logging::console_log, *};
+use solana_client_wasm::{
+    solana_sdk::{pubkey::Pubkey, system_instruction, transaction::Transaction},
+    WasmClient,
+};
 
 use crate::phantom::PhantomWallet;
 
@@ -16,7 +22,7 @@ pub fn UserInfo() -> impl IntoView {
                 }>
                     {move || {
                         wallet_resource
-                            .read()
+                            .get()
                             .map(move |wallet| {
                                 wallet
                                     .map(move |wallet| {
